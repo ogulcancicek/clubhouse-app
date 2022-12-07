@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1 Sign Up
+    form(action="" method="POST")
+        label(for="fullname") Fullname
+        input(type="fullname" name="fullname" id="fullname")
+        label(for="username") Username
+        input(type="username" name="username" id="username")
+        label(for="password") Password
+        input(type="password" name="password" id="password")
+        label(for="pass-confirmation") Password Confirmation
+        input(type="password" name="pass-confirmation" id="pass-confirmation")
+        input(type="submit" value="Sign Up")
+
+    if errMsg
+        div.error-container
+            p.error= errMsg
