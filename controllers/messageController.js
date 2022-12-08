@@ -3,9 +3,10 @@ const { body, validationResult } = require('express-validator');
 
 exports.createMessage_get = (req, res, next) => {
     if (!req.user) return res.redirect('/login');
+    if (!req.user.member) return res.redirect('/become-member');
 
     res.render('message_form', { title: 'Create new message' });
-}
+};
 
 exports.createMessage_post = [
     body('title')
@@ -40,4 +41,14 @@ exports.createMessage_post = [
             res.redirect('/');
         });
     }
-]
+];
+
+exports.delete_message_post = (req, res, next) => {
+    if (!req.user || !req.user.admin) return res.redirect('/');
+
+    Message.findByIdAndRemove(req.body.messageId, (err) => {
+        if (err) return next(err);
+
+        res.redirect('/');
+    });
+}

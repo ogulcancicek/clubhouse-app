@@ -8,7 +8,8 @@ block content
       p You are a member!
     else
       p You are not a member!
-    a(href='/create-message') Create new message
+    if (user.member)
+      a(href='/create-message') Create new message
     a(href='/logout') Logout
   else
     p Welcome to #{title}
@@ -24,5 +25,10 @@ block content
         p.author #{message.user.fullname} - 
           span.username(style='font-style: italic;') @#{message.user.username}
         p.date= message.date
+
+        if (user && user.admin) 
+          form(action="", method="post") 
+            input#messageId(type='hidden', name='messageId', value=message._id, required=true)
+            button(type="submit") Delete
   else
     p No messages yet!

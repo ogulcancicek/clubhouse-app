@@ -7,6 +7,7 @@ const messageController = require('../controllers/messageController');
 
 /// HOMEPAGE
 router.get('/', indexController.index);
+router.post('/', messageController.delete_message_post);
 
 /// USER ROUTES
 router.get('/sign-up', authController.sign_up_get);
