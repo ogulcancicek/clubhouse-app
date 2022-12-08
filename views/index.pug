@@ -8,5 +8,21 @@ block content
       p You are a member!
     else
       p You are not a member!
+    a(href='/create-message') Create new message
+    a(href='/logout') Logout
   else
     p Welcome to #{title}
+    div.links
+      a(href='/login') Login
+      a(href='/sign-up') Sign up
+      
+  if (messages.length)
+    each message in messages
+      div.message-box(style='border: 1px solid black; padding: 10px; margin: 10px;')
+        p.title(style='font-weight: bold;')= message.title
+        p.text= message.text
+        p.author #{message.user.fullname} - 
+          span.username(style='font-style: italic;') @#{message.user.username}
+        p.date= message.date
+  else
+    p No messages yet!

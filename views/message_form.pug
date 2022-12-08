@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+    h1= title
+
+    form(action="", method="post") 
+        label(for="title") Title 
+        input(type="text", name="title", id="title")
+
+        label(for="text") Text 
+        textarea(name="text", cols="30", rows="10", id="text", style="resize: none;")
+
+        input(type="submit", value="Submit") 
