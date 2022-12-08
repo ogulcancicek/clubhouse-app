@@ -7,6 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+const favicon = require('serve-favicon');
 const User = require('./models/user');
 
 require('dotenv').config();
@@ -14,6 +15,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 
 var app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico' )));
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
