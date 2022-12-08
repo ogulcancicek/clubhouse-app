@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
-const {body, validationResult, check} = require('express-validator');
+const passport = require('passport');
+const {body, validationResult} = require('express-validator');
 
 exports.sign_up_get = (req, res, next) => {
     res.render('sign_up');
@@ -26,7 +27,6 @@ exports.sign_up_post = [
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            console.log(errors.array());
             res.render('sign_up', { errMsg: 'Something went wrong' });
             return;
         };
@@ -54,4 +54,23 @@ exports.sign_up_post = [
             return next(err);
         }
     }
-]
+];
+
+exports.user_login_get = (req, res, next) => {
+    if (res.locals.currentUser) return res.redirect('/');
+    res.render('login_form');
+}
+
+exports.user_login_post = passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true,
+});
+
+exports.logout_get = (req, res, next) => {
+    req.logout(err => {
+        if (err) return next(err);
+
+        res.redirect('/');
+    });
+}
