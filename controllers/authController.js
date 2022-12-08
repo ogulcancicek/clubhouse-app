@@ -64,7 +64,6 @@ exports.user_login_get = (req, res, next) => {
 exports.user_login_post = passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
-    failureFlash: true,
 });
 
 exports.logout_get = (req, res, next) => {
