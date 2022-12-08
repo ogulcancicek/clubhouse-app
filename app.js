@@ -56,7 +56,7 @@ passport.serializeUser((user, done) => done(null, user.id) );
 
 passport.deserializeUser((id, done) => User.findById(id, (err, user) => done(err, user)));
 
-app.use(session({ secret: 'og', resave: false, saveUninitialized: true }));
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
