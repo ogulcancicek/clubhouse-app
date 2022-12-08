@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h2 #{currentUser.username}, heyyo mate!
+    h4 Do you want to become a member?
+
+    form(action="", method="post")
+        input(type="text", name="secretKey", placeholder="Secret Key")
+        input(type="submit", value="Yes, I want to become a member!")
+    
+    if (errMsg)
+        p #{errMsg}
